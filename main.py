@@ -32,7 +32,7 @@ def load_user(user_id):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -97,6 +97,7 @@ def admin_only(f):
 
 @app.route('/')
 def get_all_posts():
+    print(os.getenv("SECRET_KEY"))
     posts = BlogPost.query.all()
     return render_template("index.html", user=current_user, all_posts=posts, logged_in=current_user.is_authenticated)
 
