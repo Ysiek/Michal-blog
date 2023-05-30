@@ -97,7 +97,6 @@ def admin_only(f):
 
 @app.route('/')
 def get_all_posts():
-    print(os.getenv("SECRET_KEY"))
     posts = BlogPost.query.all()
     return render_template("index.html", user=current_user, all_posts=posts, logged_in=current_user.is_authenticated)
 
